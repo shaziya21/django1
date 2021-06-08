@@ -1,0 +1,31 @@
+<!--this template will actually handle the create and update process-->
+
+{%  extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="card card-body">
+
+			<form action="" method="POST">
+        <!-- we're goinng to leave action attribute blank coz depending on whether we're on the update or create page we want it to be sent back to the same URL so if we submit this it'll actually be submitted to the url that we're gonna be building out right now.
+   so in views.py we gonna create a view called create order so just a function based view.  -->
+				{% csrf_token %}
+				{{ formset.management_form }}
+          <!-- CSRF token : is just a way of sending that data securely-->
+				{% for form in formset %}
+							{{form}}  <!--we're rendering out each form individually thats why we used form instead of formset.-->
+              <hr>
+				{% endfor %}
+
+				<input type="submit" name="Submit">
+			</form>
+
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}
