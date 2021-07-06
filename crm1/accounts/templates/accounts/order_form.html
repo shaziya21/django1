@@ -15,8 +15,8 @@
 				{% csrf_token %}
 				{{ formset.management_form }}
           <!-- CSRF token : is just a way of sending that data securely-->
-				{% for form in formset %}
-							{{form}}  <!--we're rendering out each form individually thats why we used form instead of formset.-->
+				{% for field in form %}
+							{{field}}  <!--we're rendering out each form individually thats why we used form instead of formset.-->
               <hr>
 				{% endfor %}
 

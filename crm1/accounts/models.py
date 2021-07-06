@@ -1,13 +1,19 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 # Create your models here.
 # this models.py files are simply a python classes that inherit from django models and allow us to create classes that represent database tables here.
 
+
+
+
 class Customer(models.Model):
+	user = models.OneToOneField(User, null=True, blank= True,on_delete=models.CASCADE)  # blank= true means we can create a customer without a user attached to it.# setting up one to one relationship and set the user to be the relationship there and we're first gonna set null to be true coz we already havve some customers and i wanna be  able to migrate this
+	# a one to one field means that a user can have one customer and a customer can onnly have one user
 	name = models.CharField(max_length=200, null=True)
 	phone = models.CharField(max_length=200, null=True)
 	email = models.CharField(max_length=200, null=True)
+	profile_pic = models.ImageField(default="images.png" , null=True, blank=True)
 	date_created = models.DateTimeField(auto_now_add=True, null=True)
     # this will take a snapshot of whenever that model or item was added to the database and hold that and store in this value
 # so for this were gonnna do auto_now_add and this just allows us to automatically create that without having
@@ -53,6 +59,6 @@ class Order(models.Model):
 	product = models.ForeignKey(Product, null=True, on_delete= models.SET_NULL)  # the product mntion here after FK is the reference to the pdt.
 	date_created = models.DateTimeField(auto_now_add=True, null=True)
 	status = models.CharField(max_length=200, null=True, choices=STATUS)
-
+	note =  models.CharField(max_length=1000, null=True)
 	def __str__(self):
 		return self.product.name
